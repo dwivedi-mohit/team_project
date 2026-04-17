@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Secure Login System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #0f172a, #334155);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        color: white;
+    }
+
+    .card {
+        background: #1e293b;
+        width: 360px;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        background: #2563eb;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #1d4ed8;
+    }
+
+    .link {
+        text-align: center;
+        margin-top: 14px;
+        font-size: 14px;
+        color: #60a5fa;
+        cursor: pointer;
+    }
+
+    .error {
+        color: #f87171;
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .success {
+        color: #34d399;
+        font-size: 18px;
+        text-align: center;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="loginCard">
+    <h2>Secure Login</h2>
+
+    <div class="error" id="loginError"></div>
+
+    <label>Username</label>
+    <input type="text" id="username">
+
+    <label>Password</label>
+    <input type="password" id="password">
+
+    <button onclick="login()">Login</button>
+
+    <div class="link" onclick="showForgot()">Forgot Password?</div>
+</div>
+
+<div class="card" id="forgotCard" style="display:none;">
+    <h2>Reset Password</h2>
+
+    <div class="error" id="resetError"></div>
+
+    <label>New Password</label>
+    <input type="password" id="newPassword" placeholder="Min 8 chars, 1 uppercase, 1 number">
+
+    <button onclick="resetPassword()">Change Password</button>
+
+    <div class="link" onclick="showLogin()">Back to Login</div>
+</div>
+
+<div class="card" id="welcomeCard" style="display:none;">
+    <h2>Welcome</h2>
+    <p class="success">Hello, <span id="welcomeUser"></span> 👋</p>
+    <br>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<script>
+    // Demo stored password
+    let storedPassword = "Password123";
+
+    function login() {
+        const user = document.getElementById("username").value.trim();
+        const pass = document.getElementById("password").value;
+
+        if (user === "" || pass === "") {
+            document.getElementById("loginError").innerText = "All fields are required";
+            return;
+        }
+
+        if (pass === storedPassword) {
+            document.getElementById("welcomeUser").innerText = user;
+            document.getElementById("loginCard").style.display = "none";
+            document.getElementById("welcomeCard").style.display = "block";
+        } else {
+            document.getElementById("loginError").innerText = "Invalid credentials";
+        }
+    }
+
+    function showForgot() {
+        document.getElementById("loginCard").style.display = "none";
+        document.getElementById("forgotCard").style.display = "block";
+        document.getElementById("loginError").innerText = "";
+    }
+
+    function showLogin() {
+        document.getElementById("forgotCard").style.display = "none";
+        document.getElementById("loginCard").style.display = "block";
+        document.getElementById("resetError").innerText = "";
+    }
+
+    function resetPassword() {
+        const newPass = document.getElementById("newPassword").value;
+
+        const strong =
+            newPass.length >= 8 &&
+            /[A-Z]/.test(newPass) &&
+            /[0-9]/.test(newPass);
+
+        if (!strong) {
+            document.getElementById("resetError").innerText =
+                "Password must contain 8+ chars, 1 uppercase and 1 number";
+            return;
+        }
+
+        storedPassword = newPass;
+        alert("Password changed successfully!");
+        showLogin();
+    }
+
+    function logout() {
+        document.getElementById("welcomeCard").style.display = "none";
+        document.getElementById("loginCard").style.display = "block";
+        document.getElementById("password").value = "";
+    }
+</script>
+
+</body>
+</html>
