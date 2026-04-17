@@ -1,49 +1,54 @@
-finish
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animated Login Form || CodeByGaurav</title>
+    <title>Pranav — Secure Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="theme-dark">
+    <div class="theme-switcher" aria-label="Theme switcher">
+        <button class="theme-btn" data-theme="theme-light" title="Light Mode"><i class="fa-solid fa-sun"></i></button>
+        <button class="theme-btn" data-theme="theme-dark" title="Dark Mode"><i class="fa-solid fa-moon"></i></button>
+        <button class="theme-btn" data-theme="theme-blue" title="Blue Theme"><i class="fa-solid fa-droplet"></i></button>
+        <button class="theme-btn" data-theme="theme-purple" title="Purple Theme"><i class="fa-solid fa-palette"></i></button>
+    </div>
     <div class="container">
         <div class="circle-container" id="circleContainer"></div>
         <div class="login-box">
-            <h2>Login</h2>
-            <form action="" id="loginForm">
+            <h2>Pranav's Portal</h2>
+            <p class="subtitle">Secure access with animated feedback, fresh gradients, and easy theme switching.</p>
+            <form action="#" id="loginForm">
                 <div class="input-group">
-                    <input type="email" placeholder="Email" required>
-                    <span class="input-icon">
-                        <i class="fa-solid fa-envelope"></i>
-                    </span>
+                    <input id="email" type="email" placeholder="Email address" required>
+                    <span class="input-icon"><i class="fa-solid fa-envelope"></i></span>
                 </div>
-                <div class="input-group">
-                    <input type="password" placeholder="Password" required>
-                    <span class="input-icon">
-                        <i class="fa-solid fa-lock"></i>
-                    </span>
+                <div class="input-group password-group">
+                    <input id="password" type="password" placeholder="Password" required>
+                    <span class="input-icon"><i class="fa-solid fa-lock"></i></span>
+                    <button type="button" class="toggle-password" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
                 </div>
-                <div class="forget-password">
-                    <a href="#">Forget Your Password ?</a>
+                <div class="form-row">
+                    <label class="remember-me"><input type="checkbox" id="rememberMe"> Remember me</label>
+                    <a href="#" class="link">Forgot password?</a>
                 </div>
                 <button type="submit" class="login-btn">LOGIN</button>
+                <div class="message" id="message"></div>
             </form>
             <div class="social-login">
-                <p>log in with</p>
+                <p>Continue with</p>
                 <div class="social-icons">
-                    <div class="social-icon facebook">F</div>
-                    <div class="social-icon twitter">X</div>
-                    <div class="social-icon google">G</div>
+                    <div class="social-icon facebook"><i class="fa-brands fa-facebook-f"></i></div>
+                    <div class="social-icon twitter"><i class="fa-brands fa-x-twitter"></i></div>
+                    <div class="social-icon google"><i class="fa-brands fa-google"></i></div>
                 </div>
             </div>
             <div class="signup-link">
-                <a href="#">Sign Up</a>
+                <p>New here? <a href="#">Create account</a></p>
             </div>
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 </html>

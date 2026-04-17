@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melodia - Professional Singer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 20px 60px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: slideIn 0.8s ease-out 0.2s both;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #333;
+        }
+
+        /* Music Player Section */
+        .player-container {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .playlist {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .song-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .song-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .song-icon {
+            font-size: 40px;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .song-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .song-duration {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .play-btn {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .play-btn:hover {
+            background: #764ba2;
+            transform: scale(1.1);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Events Section */
+        .event-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .event-card {
+            background: white;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .event-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .event-date {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .event-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .event-location {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: #764ba2;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 32px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                font-size: 14px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="#" class="logo"><i class="fas fa-music"></i> Melodia</a>
+            <ul class="nav-links">
+                <li><a onclick="scrollToSection('music')">Music</a></li>
+                <li><a onclick="scrollToSection('gallery')">Gallery</a></li>
+                <li><a onclick="scrollToSection('events')">Events</a></li>
+                <li><a onclick="scrollToSection('contact')">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Welcome to Melodia</h1>
+                <p>Experience the magic of music. Follow my journey as I bring soulful melodies to the world.</p>
+                <div>
+                    <button class="btn" onclick="document.getElementById('music').scrollIntoView({behavior: 'smooth'})">Listen Now</button>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div style="width: 100%; height: 300px; background: rgba(255,255,255,0.1); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 100px;">
+                    <i class="fas fa-music"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="section">
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="stat1">2.5M</div>
+                <div class="stat-label">Followers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="stat2">45</div>
+                <div class="stat-label">Songs Released</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="stat3">100M</div>
+                <div class="stat-label">Total Streams</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="stat4">12</div>
+                <div class="stat-label">Awards Won</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music Section -->
+    <section class="section" id="music">
+        <h2 class="section-title"><i class="fas fa-music"></i> Latest Tracks</h2>
+        <div class="player-container">
+            <div class="playlist" id="playlistContainer">
+                <!-- Songs will be generated here -->
+            </div>
+        </div>
+        <div class="social-links">
+            <a href="#" class="social-link" title="Spotify"><i class="fab fa-spotify"></i></a>
+            <a href="#" class="social-link" title="Apple Music"><i class="fab fa-apple"></i></a>
+            <a href="#" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link" title="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section" id="gallery">
+        <h2 class="section-title"><i class="fas fa-image"></i> Gallery</h2>
+        <div class="gallery" id="galleryContainer">
+            <!-- Gallery items will be generated here -->
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="section" id="events">
+        <h2 class="section-title"><i class="fas fa-calendar"></i> Upcoming Events</h2>
+        <div class="event-list" id="eventsContainer">
+            <!-- Events will be generated here -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title"><i class="fas fa-envelope"></i> Get In Touch</h2>
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn" style="width: 100%; background: #667eea; color: white;">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Melodia. All rights reserved. Follow me on social media for updates!</p>
+        <div class="social-links" style="margin-top: 15px;">
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Songs Data
+        const songs = [
+            { title: 'Midnight Dreams', duration: '3:45', genre: 'Pop' },
+            { title: 'Echoes of Love', duration: '4:12', genre: 'Ballad' },
+            { title: 'Sunrise Melody', duration: '3:30', genre: 'Pop' },
+            { title: 'Dancing Shadows', duration: '3:58', genre: 'Dance' },
+            { title: 'Ocean Waves', duration: '4:05', genre: 'R&B' },
+            { title: 'Starlight Serenade', duration: '3:22', genre: 'Jazz' }
+        ];
+
+        // Generate Playlist
+        function generatePlaylist() {
+            const container = document.getElementById('playlistContainer');
+            songs.forEach((song, index) => {
+                const card = document.createElement('div');
+                card.className = 'song-card';
+                card.innerHTML = `
+                    <div class="song-icon"><i class="fas fa-compact-disc"></i></div>
+                    <div class="song-title">${song.title}</div>
+                    <div class="song-duration">${song.duration}</div>
+                    <button class="play-btn" onclick="playSong('${song.title}')">
+                        <i class="fas fa-play"></i>
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Generate Gallery
+        function generateGallery() {
+            const container = document.getElementById('galleryContainer');
+            for (let i = 1; i <= 6; i++) {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `
+                    <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; font-size: 80px; color: rgba(255,255,255,0.2);">
+                        <i class="fas fa-image"></i>
+                    </div>
+                `;
+                container.appendChild(item);
+            }
+        }
+
+        // Generate Events
+        function generateEvents() {
+            const events = [
+                { date: 'May 15, 2026', title: 'Summer Concert Series', location: 'Central Park, New York' },
+                { date: 'June 20, 2026', title: 'Music Festival', location: 'Los Angeles Convention Center' },
+                { date: 'July 10, 2026', title: 'World Tour - Europe', location: 'London, UK' },
+                { date: 'August 5, 2026', title: 'Album Release Party', location: 'Las Vegas, Nevada' },
+                { date: 'September 12, 2026', title: 'Asian Tour', location: 'Tokyo, Japan' },
+                { date: 'October 30, 2026', title: 'Year-End Finale', location: 'Miami Beach, Florida' }
+            ];
+
+            const container = document.getElementById('eventsContainer');
+            events.forEach(event => {
+                const card = document.createElement('div');
+                card.className = 'event-card';
+                card.innerHTML = `
+                    <div class="event-date"><i class="fas fa-calendar"></i> ${event.date}</div>
+                    <div class="event-title">${event.title}</div>
+                    <div class="event-location"><i class="fas fa-map-marker-alt"></i> ${event.location}</div>
+                    <button class="btn" style="width: 100%; padding: 8px;">Get Tickets</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Play Song Function
+        function playSong(songTitle) {
+            alert(`Now Playing: ${songTitle} 🎵`);
+            console.log(`Playing: ${songTitle}`);
+        }
+
+        // Smooth Scroll Function
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Contact Form Handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            
+            alert(`Thank you ${name}! Your message has been sent. I'll get back to you at ${email} soon! 🎵`);
+            this.reset();
+        });
+
+        // Counter Animation for Stats
+        function animateCounters() {
+            const counters = [
+                { id: 'stat1', target: 2500000, suffix: 'M' },
+                { id: 'stat2', target: 45, suffix: '' },
+                { id: 'stat3', target: 100000000, suffix: 'M' },
+                { id: 'stat4', target: 12, suffix: '' }
+            ];
+
+            counters.forEach(counter => {
+                const element = document.getElementById(counter.id);
+                let current = 0;
+                const increment = counter.target / 30;
+                
+                const interval = setInterval(() => {
+                    current += increment;
+                    if (current >= counter.target) {
+                        current = counter.target;
+                        clearInterval(interval);
+                    }
+                    element.textContent = (current / (counter.suffix === 'M' ? 1000000 : 1)).toFixed(counter.suffix === 'M' ? 1 : 0) + (counter.suffix ? counter.suffix : '');
+                }, 30);
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            generatePlaylist();
+            generateGallery();
+            generateEvents();
+            animateCounters();
+        });
+    </script>
+</body>
+</html>
