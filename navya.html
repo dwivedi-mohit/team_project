@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navya Java Enhancement</title>
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #eef4fb; color: #102a43; }
+    header, section, footer { max-width: 900px; margin: 24px auto; padding: 24px; background: #ffffff; border-radius: 16px; box-shadow: 0 12px 28px rgba(16, 42, 67, 0.08); }
+    header { background: linear-gradient(135deg, #316bff, #49c5b6); color: #ffffff; }
+    h1, h2, h3 { margin: 0 0 12px; }
+    p { line-height: 1.65; }
+    pre { background: #f0f5ff; padding: 16px; border-radius: 12px; overflow-x: auto; }
+    code { font-family: Consolas, 'Courier New', monospace; }
+    .card { border-left: 4px solid #316bff; }
+    .note { color: #334e68; font-size: 0.96rem; }
+    a { color: #316bff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Navya Java HTML Enhancement</h1>
+    <p>Enhancing this HTML file with Java code examples and practical instructions for running the Java code locally.</p>
+  </header>
+
+  <section>
+    <h2>Java Source Example</h2>
+    <p>This example shows a simple Java program that prints a greeting message. Save it as <code>NavyaHello.java</code> and run it from the command line.</p>
+    <pre><code>public class NavyaHello {
+  public static void main(String[] args) {
+    String name = "Navya";
+    int year = 2026;
+    System.out.println("Hello, " + name + "! Welcome to " + year + ".");
+  }
+}
+</code></pre>
+    <p class="note">Run with: <code>javac NavyaHello.java</code> then <code>java NavyaHello</code>.</p>
+  </section>
+
+  <section class="card">
+    <h2>Interactive Java Applet Example</h2>
+    <p>Below is a classic Java applet example. Modern browsers no longer support applets directly, but you can still launch it with the Java <code>appletviewer</code> tool from the JDK.</p>
+    <div style="padding: 16px; background: #f8fbff; border-radius: 12px; border: 1px solid #dbe8ff; margin-bottom: 16px;">
+      <p><strong>Applet fallback:</strong> Your browser may not show the applet because Java browser plug-ins are deprecated.</p>
+      <applet code="NavyaApplet.class" width="520" height="120">Java applet is not supported in this browser.</applet>
+    </div>
+    <p class="note">Compile with <code>javac NavyaApplet.java</code> and run with <code>appletviewer navya.html</code>.</p>
+  </section>
+
+  <section>
+    <h2>Enhancements Added</h2>
+    <ul>
+      <li>Styled HTML layout with modern typography and a clean card design.</li>
+      <li>Java source example included directly in the page.</li>
+      <li>Applet integration for a simple Java user interface demonstration.</li>
+      <li>Usage notes showing how to compile and run Java code with the JDK.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Created for the <strong>Navya</strong> HTML enhancement example. Use Java code to extend this page with real compiled classes or server-side Java if needed.</p>
+  </footer>
+</body>
+</html>

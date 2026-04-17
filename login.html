@@ -1,208 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pink Login Page</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ffcad4 0%, #ffd6e8 45%, #ffecf1 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #5a1a3e;
-            overflow-x: hidden;
-        }
+<meta charset="UTF-8">
+<title>Secure Login System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .page-background {
-            position: absolute;
-            inset: 0;
-            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"%3E%3Cg fill="none" fill-rule="evenodd" opacity="0.15"%3E%3Ctext font-family="sans-serif" font-size="40"%3E%3Ctspan x="0" y="36"%3E%F0%9F%92%96%20%F0%9F%99%8F%3C/tspan%3E%3Ctspan x="0" y="76"%3E%F0%9F%92%96%20%F0%9F%99%8F%3C/tspan%3E%3C/g%3E%3C/svg%3E');
-            opacity: 0.7;
-            z-index: 0;
-        }
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #0f172a, #334155);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        color: white;
+    }
 
-        .login-card {
-            position: relative;
-            z-index: 1;
-            width: min(420px, calc(100% - 40px));
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            border-radius: 28px;
-            box-shadow: 0 20px 60px rgba(122, 35, 83, 0.18);
-            padding: 36px;
-            overflow: hidden;
-        }
+    .card {
+        background: #1e293b;
+        width: 360px;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        animation: fadeIn 0.6s ease;
+    }
 
-        .login-card::before {
-            content: "💖 Namaste 💖";
-            position: absolute;
-            top: -24px;
-            right: -20px;
-            font-size: 60px;
-            opacity: 0.15;
-            transform: rotate(15deg);
-            pointer-events: none;
-        }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-        .login-header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-        .login-header h1 {
-            margin: 0;
-            font-size: 2rem;
-            letter-spacing: 0.02em;
-        }
+    label {
+        font-size: 14px;
+    }
 
-        .login-header p {
-            margin: 8px 0 0;
-            color: #8e4a72;
-            font-size: 0.98rem;
-        }
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+    }
 
-        .login-form {
-            display: grid;
-            gap: 16px;
-        }
+    button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        background: #2563eb;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
 
-        .login-form label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
+    button:hover {
+        background: #1d4ed8;
+    }
 
-        .login-form input {
-            width: 100%;
-            padding: 14px 16px;
-            border-radius: 18px;
-            border: 1px solid #e5a7c1;
-            background: rgba(255, 255, 255, 0.95);
-            font-size: 1rem;
-            color: #5a1a3e;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
+    .link {
+        text-align: center;
+        margin-top: 14px;
+        font-size: 14px;
+        color: #60a5fa;
+        cursor: pointer;
+    }
 
-        .login-form input:focus {
-            outline: none;
-            border-color: #ff79a9;
-            box-shadow: 0 0 0 4px rgba(255, 121, 169, 0.18);
-        }
+    .error {
+        color: #f87171;
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
 
-        .login-form .field-note {
-            font-size: 0.88rem;
-            color: #9f5f81;
-            margin-top: -8px;
-        }
-
-        .login-button {
-            display: inline-flex;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 18px;
-            border: none;
-            border-radius: 22px;
-            background: linear-gradient(135deg, #ff6bb5 0%, #ff97c2 100%);
-            color: white;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .login-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 16px 28px rgba(255, 107, 181, 0.28);
-        }
-
-        .bottom-section {
-            display: grid;
-            gap: 14px;
-            margin-top: 20px;
-        }
-
-        .link-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 16px;
-            border-radius: 18px;
-            background: #ffe2ed;
-            border: 1px solid rgba(255, 146, 176, 0.5);
-            color: #7f2856;
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-        .link-card span {
-            font-size: 1.05rem;
-        }
-
-        .small-text {
-            font-size: 0.92rem;
-            color: #a75e87;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .emoji-row {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 18px;
-            font-size: 1.4rem;
-        }
-
-        @media (max-width: 420px) {
-            .login-card {
-                padding: 28px 22px;
-            }
-        }
-    </style>
+    .success {
+        color: #34d399;
+        font-size: 18px;
+        text-align: center;
+    }
+</style>
 </head>
+
 <body>
-    <div class="page-background"></div>
-    <div class="login-card">
-        <div class="login-header">
-            <h1>Enter Your Personal Detail</h1>
-            <p>Welcome! Use your email and password to sign in.</p>
-        </div>
 
-        <form class="login-form">
-            <div>
-                <label for="email">Email address</label>
-                <input id="email" type="email" placeholder="yourname@mail.com" required />
-                <div class="field-note">Everyone gets their mail id here.</div>
-            </div>
+<div class="card" id="loginCard">
+    <h2>Secure Login</h2>
 
-            <div>
-                <label for="password">Password</label>
-                <input id="password" type="password" placeholder="Enter your password" required />
-                <div class="field-note">Keep your password safe and secret.</div>
-            </div>
+    <div class="error" id="loginError"></div>
 
-            <button type="submit" class="login-button">Sign In ❤️</button>
-        </form>
+    <label>Username</label>
+    <input type="text" id="username">
 
-        <div class="bottom-section">
-            <a href="#" class="link-card">
-                <span>Create New Account</span>
-                <span>✨</span>
-            </a>
-            <a href="#" class="link-card">
-                <span>Sign Up</span>
-                <span>🙏</span>
-            </a>
-        </div>
+    <label>Password</label>
+    <input type="password" id="password">
 
-        <div class="emoji-row">❤️ 💌 🙏 🌸 💫</div>
-        <div class="small-text">A sweet login page made with fun pink vibes and loving emojis.</div>
-    </div>
+    <button onclick="login()">Login</button>
+
+    <div class="link" onclick="showForgot()">Forgot Password?</div>
+</div>
+
+<div class="card" id="forgotCard" style="display:none;">
+    <h2>Reset Password</h2>
+
+    <div class="error" id="resetError"></div>
+
+    <label>New Password</label>
+    <input type="password" id="newPassword" placeholder="Min 8 chars, 1 uppercase, 1 number">
+
+    <button onclick="resetPassword()">Change Password</button>
+
+    <div class="link" onclick="showLogin()">Back to Login</div>
+</div>
+
+<div class="card" id="welcomeCard" style="display:none;">
+    <h2>Welcome</h2>
+    <p class="success">Hello, <span id="welcomeUser"></span> 👋</p>
+    <br>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<script>
+    // Demo stored password
+    let storedPassword = "Password123";
+
+    function login() {
+        const user = document.getElementById("username").value.trim();
+        const pass = document.getElementById("password").value;
+
+        if (user === "" || pass === "") {
+            document.getElementById("loginError").innerText = "All fields are required";
+            return;
+        }
+
+        if (pass === storedPassword) {
+            document.getElementById("welcomeUser").innerText = user;
+            document.getElementById("loginCard").style.display = "none";
+            document.getElementById("welcomeCard").style.display = "block";
+        } else {
+            document.getElementById("loginError").innerText = "Invalid credentials";
+        }
+    }
+
+    function showForgot() {
+        document.getElementById("loginCard").style.display = "none";
+        document.getElementById("forgotCard").style.display = "block";
+        document.getElementById("loginError").innerText = "";
+    }
+
+    function showLogin() {
+        document.getElementById("forgotCard").style.display = "none";
+        document.getElementById("loginCard").style.display = "block";
+        document.getElementById("resetError").innerText = "";
+    }
+
+    function resetPassword() {
+        const newPass = document.getElementById("newPassword").value;
+
+        const strong =
+            newPass.length >= 8 &&
+            /[A-Z]/.test(newPass) &&
+            /[0-9]/.test(newPass);
+
+        if (!strong) {
+            document.getElementById("resetError").innerText =
+                "Password must contain 8+ chars, 1 uppercase and 1 number";
+            return;
+        }
+
+        storedPassword = newPass;
+        alert("Password changed successfully!");
+        showLogin();
+    }
+
+    function logout() {
+        document.getElementById("welcomeCard").style.display = "none";
+        document.getElementById("loginCard").style.display = "block";
+        document.getElementById("password").value = "";
+    }
+</script>
+
 </body>
 </html>
