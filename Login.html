@@ -102,6 +102,12 @@
     <label>Password</label>
     <input type="password" id="password">
 
+    <label>Gender</label>
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="male">Male</label>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">Female</label>
+
     <button onclick="login()">Login</button>
 
     <div class="link" onclick="showForgot()">Forgot Password?</div>
@@ -134,8 +140,9 @@
     function login() {
         const user = document.getElementById("username").value.trim();
         const pass = document.getElementById("password").value;
+        const gender = document.querySelector('input[name="gender"]:checked');
 
-        if (user === "" || pass === "") {
+        if (user === "" || pass === "" || !gender) {
             document.getElementById("loginError").innerText = "All fields are required";
             return;
         }
@@ -184,6 +191,7 @@
         document.getElementById("welcomeCard").style.display = "none";
         document.getElementById("loginCard").style.display = "block";
         document.getElementById("password").value = "";
+        document.querySelectorAll('input[name="gender"]').forEach(radio => radio.checked = false);
     }
 </script>
 
