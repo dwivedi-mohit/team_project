@@ -1,15 +1,17 @@
 ﻿:root {
     color-scheme: dark;
     --bg: #0f172a;
-    --panel: rgba(15, 23, 42, 0.9);
-    --panel-border: rgba(255, 255, 255, 0.08);
+    --panel: rgba(15, 23, 42, 0.95);
+    --panel-border: rgba(255, 255, 255, 0.1);
     --text: #edf2f7;
     --muted: #94a3b8;
     --accent: #7c3aed;
     --accent-2: #38bdf8;
+    --accent-3: #f472b6;
     --surface: rgba(255,255,255,0.05);
-    --surface-strong: rgba(255,255,255,0.12);
-    --shadow: 0 25px 60px rgba(15, 23, 42, 0.45);
+    --surface-strong: rgba(255,255,255,0.16);
+    --shadow: 0 28px 80px rgba(15, 23, 42, 0.4);
+    --panel-glow: rgba(56, 189, 248, 0.18);
 }
 
 html, body {
@@ -36,6 +38,16 @@ body.theme-light .container {
 
 body.theme-light .login-btn {
     box-shadow: 0 18px 30px rgba(59, 130, 246, 0.2);
+}
+
+body.theme-blue .container {
+    background: rgba(240,249,255,0.92);
+    border-color: rgba(14,165,233,0.18);
+}
+
+body.theme-purple .container {
+    background: rgba(249,240,255,0.94);
+    border-color: rgba(139,92,246,0.18);
 }
 
 body.theme-light .input-group input {
@@ -133,12 +145,84 @@ body {
     margin: 0 0 10px;
     font-size: 2rem;
     letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #38bdf8, #a855f7);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
 .login-box .subtitle {
     margin: 0 0 28px;
     color: var(--muted);
     line-height: 1.65;
+}
+
+.feature-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--accent-2);
+    font-size: 0.92rem;
+}
+
+.hero-line {
+    margin: 0 0 10px;
+    font-weight: 600;
+    color: #c7d2fe;
+}
+
+.password-strength {
+    margin: -10px 0 18px;
+    color: var(--muted);
+    font-size: 0.94rem;
+}
+
+.strength-meter {
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    overflow: hidden;
+    margin: 8px 0 4px;
+}
+
+.strength-meter span {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f97316, #84cc16);
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+.strength-meter span.weak { width: 25%; background: linear-gradient(90deg, #f87171, #fb7185); }
+.strength-meter span.fair { width: 55%; background: linear-gradient(90deg, #fbbf24, #f97316); }
+.strength-meter span.good { width: 80%; background: linear-gradient(90deg, #22c55e, #14b8a6); }
+.strength-meter span.strong { width: 100%; background: linear-gradient(90deg, #34d399, #60a5fa); }
+
+.tip-panel {
+    margin-top: 24px;
+    padding: 16px 18px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.theme-btn.active {
+    border-color: rgba(255,255,255,0.28);
+    background: rgba(255,255,255,0.14);
+}
+
+.theme-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.16);
 }
 
 .input-group {

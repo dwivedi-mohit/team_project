@@ -18,7 +18,9 @@
         <div class="circle-container" id="circleContainer"></div>
         <div class="login-box">
             <h2>Pranav's Portal</h2>
+            <p class="hero-line" id="greeting">Welcome back! Secure your space with style.</p>
             <p class="subtitle">Secure access with animated feedback, fresh gradients, and easy theme switching.</p>
+            <div class="feature-badge">Top features: password strength, remembered email, and instant theme preview</div>
             <form action="#" id="loginForm">
                 <div class="input-group">
                     <input id="email" type="email" placeholder="Email address" required>
@@ -29,13 +31,21 @@
                     <span class="input-icon"><i class="fa-solid fa-lock"></i></span>
                     <button type="button" class="toggle-password" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
                 </div>
+                <div class="password-strength" aria-hidden="true">
+                    <span>Password strength</span>
+                    <div class="strength-meter">
+                        <span id="strengthBar"></span>
+                    </div>
+                    <small id="strengthText">Type a password to test strength.</small>
+                </div>
                 <div class="form-row">
                     <label class="remember-me"><input type="checkbox" id="rememberMe"> Remember me</label>
                     <a href="#" class="link">Forgot password?</a>
                 </div>
                 <button type="submit" class="login-btn">LOGIN</button>
-                <div class="message" id="message"></div>
+                <div class="message" id="message" aria-live="polite"></div>
             </form>
+            <div class="tip-panel" id="tipPanel">Tip: Use a long passphrase for better security.</div>
             <div class="social-login">
                 <p>Continue with</p>
                 <div class="social-icons">
