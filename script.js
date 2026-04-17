@@ -1,199 +1,102 @@
-// Enhanced Login Form with JavaScript
+﻿const circleContainer = document.getElementById('circleContainer');
+const loginForm = document.getElementById('loginForm');
+const loginButton = document.querySelector('.login-btn');
+const themeButtons = document.querySelectorAll('.theme-btn');
+const messageBox = document.getElementById('message');
 
-document.addEventListener('DOMContentLoaded', function() {
-    const loginForm = document.getElementById('loginForm');
-    const emailInput = document.querySelector('input[type="email"]');
-    const passwordInput = document.querySelector('input[type="password"]');
-    const loginBtn = document.querySelector('.login-btn');
-    const circleContainer = document.getElementById('circleContainer');
+function setTheme(theme) {
+    document.body.className = theme;
+    localStorage.setItem('selectedTheme', theme);
+}
 
-    // Create animated circles
-    function createCircles() {
-        for (let i = 0; i < 5; i++) {
-            const circle = document.createElement('div');
-            circle.classList.add('circle');
-            circle.style.width = (50 + i * 50) + 'px';
-            circle.style.height = (50 + i * 50) + 'px';
-            circle.style.left = -(25 + i * 25) + 'px';
-            circle.style.top = -(25 + i * 25) + 'px';
-            circleContainer.appendChild(circle);
-        }
-    }
-    createCircles();
-
-    // Email validation
-    function validateEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
-
-    // Real-time email validation
-    emailInput.addEventListener('blur', function() {
-        if (this.value && !validateEmail(this.value)) {
-            this.style.borderColor = '#ff6b6b';
-            showError('Please enter a valid email address');
-        } else {
-            this.style.borderColor = '#4CAF50';
-            clearError();
-        }
+if (themeButtons.length) {
+    themeButtons.forEach(button => {
+        button.addEventListener('click', () => setTheme(button.dataset.theme));
     });
 
-    // Password strength indicator
-    passwordInput.addEventListener('input', function() {
-        const strength = getPasswordStrength(this.value);
-        updatePasswordIndicator(strength);
+    const savedTheme = localStorage.getItem('selectedTheme');
+    if (savedTheme) setTheme(savedTheme);
+}
+
+if (circleContainer) {
+    document.addEventListener('mousemove', event => {
+        const x = (event.clientX / window.innerWidth - 0.5) * 24;
+        const y = (event.clientY / window.innerHeight - 0.5) * 24;
+        circleContainer.style.transform = `translate(${x}px, ${y}px)`;
     });
+}
 
-    function getPasswordStrength(password) {
-        let strength = 0;
-        if (password.length >= 8) strength++;
-        if (password.match(/[a-z]+/)) strength++;
-        if (password.match(/[A-Z]+/)) strength++;
-        if (password.match(/[0-9]+/)) strength++;
-        if (password.match(/[$@#&!]+/)) strength++;
-        return strength;
+function showMessage(text, success = true) {
+    if (messageBox) {
+        messageBox.textContent = text;
+        messageBox.style.color = success ? '#38bdf8' : '#f87171';
     }
+}
 
-    function updatePasswordIndicator(strength) {
-        let message = '';
-        let color = '';
-        switch(strength) {
-            case 0:
-            case 1:
-                message = 'Weak';
-                color = '#ff6b6b';
-                break;
-            case 2:
-            case 3:
-                message = 'Medium';
-                color = '#ffd93d';
-                break;
-            case 4:
-            case 5:
-                message = 'Strong';
-                color = '#4CAF50';
-                break;
-        }
-        console.log('Password Strength: ' + message);
+function clearMessage() {
+    if (messageBox) {
+        messageBox.textContent = '';
     }
+}
 
-    // Add password visibility toggle
-    addPasswordToggle();
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
 
-    function addPasswordToggle() {
-        const passwordGroup = passwordInput.parentElement;
-        const toggleBtn = document.createElement('button');
-        toggleBtn.type = 'button';
-        toggleBtn.innerHTML = '<i class="fa-solid fa-eye"></i>';
-        toggleBtn.classList.add('password-toggle');
-        toggleBtn.style.cssText = 'position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #666;';
-        
-        passwordGroup.style.position = 'relative';
-        passwordGroup.appendChild(toggleBtn);
-
-        toggleBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggleBtn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
-            } else {
-                passwordInput.type = 'password';
-                toggleBtn.innerHTML = '<i class="fa-solid fa-eye"></i>';
-            }
+const passwordInput = document.getElementById('password');
+if (passwordInput) {
+    const toggleButton = document.querySelector('.toggle-password');
+    if (toggleButton) {
+        toggleButton.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            toggleButton.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye"></i>' : '<i class="fa-solid fa-eye-slash"></i>';
         });
     }
+}
 
-    // Form submission
-    loginForm.addEventListener('submit', function(e) {
-        e.preventDefault();
+if (loginForm) {
+    loginForm.addEventListener('submit', event => {
+        event.preventDefault();
+        const email = document.getElementById('email').value.trim();
+        const password = passwordInput.value.trim();
 
-        const email = emailInput.value;
-        const password = passwordInput.value;
+        clearMessage();
 
-        // Validation
         if (!email || !password) {
-            showError('Please fill in all fields');
+            showMessage('Please fill in both fields.', false);
             return;
         }
 
         if (!validateEmail(email)) {
-            showError('Invalid email format');
+            showMessage('Please enter a valid email address.', false);
             return;
         }
 
-        if (password.length < 6) {
-            showError('Password must be at least 6 characters');
-            return;
-        }
+        loginButton.disabled = true;
+        loginButton.textContent = 'Signing in...';
+        loginButton.style.cursor = 'wait';
 
-        // Show loading state
-        loginBtn.disabled = true;
-        loginBtn.textContent = 'Logging in...';
+        setTimeout(() => {
+            showMessage('Welcome back! Redirecting...', true);
+            loginButton.textContent = 'Welcome back!';
+            loginButton.style.background = 'linear-gradient(135deg, #38bdf8, #7c3aed)';
+        }, 650);
 
-        // Simulate API call
-        setTimeout(function() {
-            clearError();
-            alert('Login successful!\nEmail: ' + email);
+        setTimeout(() => {
+            loginButton.textContent = 'LOGIN';
+            loginButton.disabled = false;
+            loginButton.style.cursor = 'pointer';
+            loginButton.style.background = '';
             loginForm.reset();
-            loginBtn.disabled = false;
-            loginBtn.textContent = 'LOGIN';
-        }, 1500);
+        }, 1800);
     });
+}
 
-    // Social login handlers
-    document.querySelectorAll('.social-icon').forEach(icon => {
-        icon.addEventListener('click', function() {
-            const provider = this.classList[1];
-            console.log('Logging in with: ' + provider);
-            alert('Redirecting to ' + provider + ' login...');
-        });
-    });
-
-    // Forgot password
-    document.querySelector('.forget-password a').addEventListener('click', function(e) {
-        e.preventDefault();
-        const email = prompt('Enter your email address:');
-        if (email) {
-            if (validateEmail(email)) {
-                alert('Password reset link sent to ' + email);
-            } else {
-                alert('Please enter a valid email');
-            }
-        }
-    });
-
-    // Sign up link
-    document.querySelector('.signup-link a').addEventListener('click', function(e) {
-        e.preventDefault();
-        alert('Redirecting to Sign Up page...');
-    });
-
-    // Error handling
-    function showError(message) {
-        let errorDiv = document.querySelector('.error-message');
-        if (!errorDiv) {
-            errorDiv = document.createElement('div');
-            errorDiv.classList.add('error-message');
-            errorDiv.style.cssText = 'color: #ff6b6b; font-size: 12px; margin-top: 10px; text-align: center;';
-            loginForm.appendChild(errorDiv);
-        }
-        errorDiv.textContent = message;
-    }
-
-    function clearError() {
-        const errorDiv = document.querySelector('.error-message');
-        if (errorDiv) {
-            errorDiv.textContent = '';
-        }
-    }
-
-    // Input focus effects
-    [emailInput, passwordInput].forEach(input => {
-        input.addEventListener('focus', function() {
-            this.parentElement.style.borderColor = '#007bff';
-        });
-        input.addEventListener('blur', function() {
-            this.parentElement.style.borderColor = '#ddd';
-        });
+document.querySelectorAll('.social-icon').forEach(icon => {
+    icon.addEventListener('click', () => {
+        const provider = icon.classList.contains('facebook') ? 'Facebook' : icon.classList.contains('twitter') ? 'X' : 'Google';
+        showMessage(`Redirecting to ${provider}...`, true);
     });
 });
