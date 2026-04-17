@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Page</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: rgba(255, 255, 255, 0.1);
+      --card-border: rgba(255, 255, 255, 0.16);
+      --text: #f3f5ff;
+      --muted: #c8d2ff;
+      --accent: #6c5ce7;
+      --accent-strong: #8c7bff;
+      --danger: #ff6b6b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at top, rgba(108, 92, 231, 0.28), transparent 35%),
+        linear-gradient(135deg, #111827, #0c1526 55%, #0d1425 100%);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .login-card {
+      width: min(420px, 100%);
+      padding: 32px;
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      border-radius: 24px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 1.9rem;
+      letter-spacing: 0.05em;
+    }
+
+    .brand p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 180ms ease, background-color 180ms ease;
+    }
+
+    input:focus {
+      border-color: var(--accent-strong);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .actions label {
+      margin: 0;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .actions a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.93rem;
+    }
+
+    .actions a:hover {
+      text-decoration: underline;
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), #8770ff);
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .login-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(108, 92, 231, 0.32);
+    }
+
+    .notice {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .error {
+      color: var(--danger);
+      font-size: 0.92rem;
+      margin-top: 8px;
+      display: none;
+    }
+
+    @media (max-width: 420px) {
+      .login-card {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="login-card" aria-label="Login form">
+    <div class="brand">
+      <h1>Sign In</h1>
+      <p>Enter your email and password to access your account.</p>
+    </div>
+
+    <form id="loginForm" novalidate>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input id="email" type="email" name="email" placeholder="you@example.com" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" placeholder="••••••••" required minlength="6" />
+      </div>
+
+      <div class="actions">
+        <label>
+          <input type="checkbox" id="remember" name="remember" />
+          Remember me
+        </label>
+        <a href="#">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="login-button">Log In</button>
+      <p class="error" id="errorText">Please enter a valid email and password.</p>
+      <p class="notice">New here? <a href="#">Create an account</a></p>
+    </form>
+  </main>
+
+  <script>
+    const form = document.querySelector('#loginForm');
+    const email = document.querySelector('#email');
+    const password = document.querySelector('#password');
+    const errorText = document.querySelector('#errorText');
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      errorText.style.display = 'none';
+
+      const emailValue = email.value.trim();
+      const passwordValue = password.value.trim();
+
+      if (!emailValue || !passwordValue || passwordValue.length < 6) {
+        errorText.textContent = 'Please enter a valid email and password with at least 6 characters.';
+        errorText.style.display = 'block';
+        return;
+      }
+
+      alert('Login submitted successfully!');
+      form.reset();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriage Validator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+            padding-right: 35px;
+        }
+
+        .criteria {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .criteria h3 {
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .criteria p {
+            margin: 5px 0;
+            padding-left: 10px;
+            border-left: 3px solid #667eea;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-validate {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-validate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-reset {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-reset:hover {
+            background: #d0d0d0;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result.eligible {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+        }
+
+        .result.not-eligible {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+        }
+
+        .result-icon {
+            font-size: 24px;
+            margin-right: 8px;
+        }
+
+        .result-details {
+            margin-top: 10px;
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .error {
+            color: #dc3545;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        .age-info {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💍 Marriage Validator</h1>
+        <p class="subtitle">Check marriage eligibility based on age criteria</p>
+
+        <div class="criteria">
+            <h3>Age Requirements:</h3>
+            <p><strong>👰 Bride (Female):</strong> 21 - 45 years old</p>
+            <p><strong>🤵 Groom (Male):</strong> 18 - 40 years old</p>
+        </div>
+
+        <form id="validationForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter full name" required>
+                <span class="error" id="nameError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" required>
+                    <option value="">-- Select Gender --</option>
+                    <option value="female">Female (Bride)</option>
+                    <option value="male">Male (Groom)</option>
+                </select>
+                <span class="error" id="genderError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" placeholder="Enter age" min="1" max="150" required>
+                <div class="age-info">Enter your current age in years</div>
+                <span class="error" id="ageError"></span>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn-validate">Validate</button>
+                <button type="reset" class="btn-reset">Reset</button>
+            </div>
+
+            <div id="result" class="result">
+                <span class="result-icon" id="resultIcon"></span>
+                <span id="resultMessage"></span>
+                <div class="result-details" id="resultDetails"></div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Age requirements
+        const requirements = {
+            female: { min: 21, max: 45, title: 'Bride' },
+            male: { min: 18, max: 40, title: 'Groom' }
+        };
+
+        const form = document.getElementById('validationForm');
+        const nameInput = document.getElementById('name');
+        const genderSelect = document.getElementById('gender');
+        const ageInput = document.getElementById('age');
+        const resultDiv = document.getElementById('result');
+        const resultIcon = document.getElementById('resultIcon');
+        const resultMessage = document.getElementById('resultMessage');
+        const resultDetails = document.getElementById('resultDetails');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            validateMarriage();
+        });
+
+        form.addEventListener('reset', function() {
+            clearErrors();
+            resultDiv.classList.remove('show', 'eligible', 'not-eligible');
+        });
+
+        function clearErrors() {
+            document.getElementById('nameError').textContent = '';
+            document.getElementById('nameError').classList.remove('show');
+            document.getElementById('genderError').textContent = '';
+            document.getElementById('genderError').classList.remove('show');
+            document.getElementById('ageError').textContent = '';
+            document.getElementById('ageError').classList.remove('show');
+        }
+
+        function validateMarriage() {
+            clearErrors();
+            let isValid = true;
+
+            // Validate name
+            if (!nameInput.value.trim()) {
+                showError('nameError', 'Please enter a name');
+                isValid = false;
+            } else if (nameInput.value.trim().length < 2) {
+                showError('nameError', 'Name must be at least 2 characters');
+                isValid = false;
+            }
+
+            // Validate gender
+            if (!genderSelect.value) {
+                showError('genderError', 'Please select a gender');
+                isValid = false;
+            }
+
+            // Validate age
+            const age = parseInt(ageInput.value);
+            if (!ageInput.value || isNaN(age)) {
+                showError('ageError', 'Please enter a valid age');
+                isValid = false;
+            } else if (age < 1 || age > 150) {
+                showError('ageError', 'Please enter a valid age between 1 and 150');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                resultDiv.classList.remove('show');
+                return;
+            }
+
+            // Check eligibility
+            const gender = genderSelect.value;
+            const requirement = requirements[gender];
+            const isEligible = age >= requirement.min && age <= requirement.max;
+
+            displayResult(isEligible, nameInput.value, age, requirement, gender);
+        }
+
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+        }
+
+        function displayResult(isEligible, name, age, requirement, gender) {
+            resultDiv.classList.add('show');
+
+            if (isEligible) {
+                resultDiv.classList.remove('not-eligible');
+                resultDiv.classList.add('eligible');
+                resultIcon.textContent = '✅';
+                resultMessage.textContent = 'Eligible for Marriage';
+                resultDetails.innerHTML = `
+                    <strong>${name}</strong> (Age: ${age} years)<br>
+                    ✓ Meets the age requirement for ${requirement.title} (${requirement.min}-${requirement.max} years)
+                `;
+            } else {
+                resultDiv.classList.remove('eligible');
+                resultDiv.classList.add('not-eligible');
+                resultIcon.textContent = '❌';
+                resultMessage.textContent = 'Not Eligible for Marriage';
+                
+                const ageDifference = requirement.min - age;
+                const ageExcess = age - requirement.max;
+
+                let reason = '';
+                if (age < requirement.min) {
+                    reason = `${ageDifference} year${ageDifference > 1 ? 's' : ''} below minimum age`;
+                } else {
+                    reason = `${ageExcess} year${ageExcess > 1 ? 's' : ''} above maximum age`;
+                }
+
+                resultDetails.innerHTML = `
+                    <strong>${name}</strong> (Age: ${age} years)<br>
+                    ✗ Does not meet the age requirement for ${requirement.title} (${requirement.min}-${requirement.max} years)<br>
+                    <span style="margin-top: 5px; display: block;">Reason: ${reason}</span>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
