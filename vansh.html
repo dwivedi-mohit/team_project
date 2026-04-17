@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GT vs KKR Betting Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .teams {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .team {
+            background-color: #e0e0e0;
+            padding: 20px;
+            border-radius: 10px;
+            width: 45%;
+        }
+        .team h2 {
+            margin-top: 0;
+        }
+        .odds {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .bet-form {
+            margin-top: 20px;
+        }
+        .bet-form input[type="radio"] {
+            margin: 10px;
+        }
+        .bet-form button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .bet-form button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GT vs KKR Betting</h1>
+        <p>Who will win today's match?</p>
+        
+        <div class="teams">
+            <div class="team">
+                <h2>Gujarat Titans</h2>
+                <p class="odds">Odds: 1.8</p>
+            </div>
+            <div class="team">
+                <h2>Kolkata Knight Riders</h2>
+                <p class="odds">Odds: 2.1</p>
+            </div>
+        </div>
+        
+        <form class="bet-form" id="betForm">
+            <label>
+                <input type="radio" name="winner" value="GT" required>
+                Bet on Gujarat Titans (GT)
+            </label><br>
+            <label>
+                <input type="radio" name="winner" value="KKR" required>
+                Bet on Kolkata Knight Riders (KKR)
+            </label><br><br>
+            <button type="submit">Place Bet</button>
+        </form>
+        
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('betForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const selected = document.querySelector('input[name="winner"]:checked');
+            const resultDiv = document.getElementById('result');
+            
+            if (selected) {
+                resultDiv.textContent = `You have placed a bet on ${selected.value === 'GT' ? 'Gujarat Titans (GT)' : 'Kolkata Knight Riders (KKR)'}. Good luck!`;
+                resultDiv.className = 'result success';
+                resultDiv.style.display = 'block';
+            } else {
+                resultDiv.textContent = 'Please select a team to bet on.';
+                resultDiv.className = 'result error';
+                resultDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
