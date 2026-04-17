@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Animated login form with modern design and social authentication options">
+    <meta name="theme-color" content="#000">
+    <title>Animated Login Form || CodeByGaurav</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaelS39OUpCSGCUJAMVA3zS4jWde36OHZrEJSEY4xJlwWQIUend1UnqXSZoQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <div class="circle-container" id="circleContainer" aria-hidden="true"></div>
+        
+        <div class="login-box" role="main">
+            <h1>Login</h1>
+            
+            <form id="loginForm" method="POST" novalidate aria-label="Login form">
+                <div class="form-group">
+                    <label for="email" class="sr-only">Email Address</label>
+                    <div class="input-group">
+                        <input 
+                            type="email" 
+                            id="email"
+                            name="email"
+                            placeholder="Email" 
+                            required
+                            aria-required="true"
+                            aria-describedby="email-error">
+                        <span class="input-icon" aria-hidden="true">
+                            <i class="fa-solid fa-envelope"></i>
+                        </span>
+                    </div>
+                    <span id="email-error" class="error-message" role="alert"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="sr-only">Password</label>
+                    <div class="input-group">
+                        <input 
+                            type="password" 
+                            id="password"
+                            name="password"
+                            placeholder="Password" 
+                            required
+                            aria-required="true"
+                            aria-describedby="password-error">
+                        <span class="input-icon" aria-hidden="true">
+                            <i class="fa-solid fa-lock"></i>
+                        </span>
+                    </div>
+                    <span id="password-error" class="error-message" role="alert"></span>
+                </div>
+
+                <div class="forget-password">
+                    <a href="#" aria-label="Recover your forgotten password">Forgot Your Password?</a>
+                </div>
+
+                <button type="submit" class="login-btn" aria-label="Submit login form">
+                    LOGIN
+                </button>
+            </form>
+
+            <section class="social-login" aria-labelledby="social-heading">
+                <p id="social-heading">Log in with</p>
+                <div class="social-icons" role="group" aria-label="Social login options">
+                    <a href="#" class="social-icon facebook" aria-label="Login with Facebook" title="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon twitter" aria-label="Login with X (Twitter)" title="X">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon google" aria-label="Login with Google" title="Google">
+                        <i class="fa-brands fa-google"></i>
+                    </a>
+                </div>
+            </section>
+
+            <footer class="signup-link">
+                <p>Don't have an account? <a href="#" aria-label="Go to sign up page">Sign Up</a></p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+using System;
+
+class StudentLogin
+{
+    static void Main()
+    {
+        // Predefined student credentials
+        string correctUsername = "student01";
+        string correctPassword = "pass123";
+
+        Console.WriteLine("----- Student Login Page -----");
+
+        Console.Write("Enter Username: ");
+        string username = Console.ReadLine();
+
+        Console.Write("Enter Password: ");
+        string password = Console.ReadLine();
+
+        if (username == correctUsername && password == correctPassword)
+        {
+            Console.WriteLine("\nLogin Successful!");
+            Console.WriteLine("Welcome, Student");
+        }
+        else
+        {
+            Console.WriteLine("\nInvalid Username or Password!");
+        }
+
+        Console.ReadLine(); // Hold screen
+    }
+}
