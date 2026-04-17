@@ -1,35 +1,27 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Login — Secure Access</title>
+    <title>Pranav — Secure Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="theme-switcher">
-        <button class="theme-btn" data-theme="light" title="Light Mode">
-            <i class="fa-solid fa-sun"></i>
-        </button>
-        <button class="theme-btn" data-theme="dark" title="Dark Mode">
-            <i class="fa-solid fa-moon"></i>
-        </button>
-        <button class="theme-btn" data-theme="blue" title="Blue Theme">
-            <i class="fa-solid fa-droplet"></i>
-        </button>
-        <button class="theme-btn" data-theme="purple" title="Purple Theme">
-            <i class="fa-solid fa-palette"></i>
-        </button>
+<body class="theme-dark">
+    <div class="theme-switcher" aria-label="Theme switcher">
+        <button class="theme-btn" data-theme="theme-light" title="Light Mode"><i class="fa-solid fa-sun"></i></button>
+        <button class="theme-btn" data-theme="theme-dark" title="Dark Mode"><i class="fa-solid fa-moon"></i></button>
+        <button class="theme-btn" data-theme="theme-blue" title="Blue Theme"><i class="fa-solid fa-droplet"></i></button>
+        <button class="theme-btn" data-theme="theme-purple" title="Purple Theme"><i class="fa-solid fa-palette"></i></button>
     </div>
     <div class="container">
         <div class="circle-container" id="circleContainer"></div>
         <div class="login-box">
-            <h2>Secure Login</h2>
-            <p class="subtitle">Experience advanced colours, enhanced controls, and smarter login feedback.</p>
+            <h2>Pranav's Portal</h2>
+            <p class="subtitle">Secure access with animated feedback, fresh gradients, and easy theme switching.</p>
             <form action="#" id="loginForm">
                 <div class="input-group">
-                    <input id="email" type="email" placeholder="Email" required>
+                    <input id="email" type="email" placeholder="Email address" required>
                     <span class="input-icon"><i class="fa-solid fa-envelope"></i></span>
                 </div>
                 <div class="input-group password-group">
@@ -45,11 +37,11 @@
                 <div class="message" id="message"></div>
             </form>
             <div class="social-login">
-                <p>Or sign in with</p>
+                <p>Continue with</p>
                 <div class="social-icons">
-                    <div class="social-icon facebook" data-provider="Facebook">F</div>
-                    <div class="social-icon twitter" data-provider="X">X</div>
-                    <div class="social-icon google" data-provider="Google">G</div>
+                    <div class="social-icon facebook"><i class="fa-brands fa-facebook-f"></i></div>
+                    <div class="social-icon twitter"><i class="fa-brands fa-x-twitter"></i></div>
+                    <div class="social-icon google"><i class="fa-brands fa-google"></i></div>
                 </div>
             </div>
             <div class="signup-link">
